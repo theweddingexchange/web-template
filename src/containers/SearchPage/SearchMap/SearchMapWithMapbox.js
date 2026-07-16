@@ -396,6 +396,13 @@ class SearchMapWithMapbox extends Component {
       mapComponentRefreshToken,
       config,
     } = this.props;
+    const onListingClickedWithZoom = clickedListings => {
+      if (clickedListings && clickedListings.length === 1 && this.map) {
+        const geo = clickedListings[0].attributes.geolocation;
+        this.map.flyTo({ center: [geo.lng, geo.lat], zoom: 15 });
+      }
+      onListingClicked(clickedListings);
+    };
 
     if (this.map) {
       // Create markers out of price labels and grouped labels
@@ -403,7 +410,7 @@ class SearchMapWithMapbox extends Component {
         listings,
         activeListingId,
         infoCardOpen,
-        onListingClicked,
+        onListingClickedWithZoom,
         mapComponentRefreshToken
       );
 
