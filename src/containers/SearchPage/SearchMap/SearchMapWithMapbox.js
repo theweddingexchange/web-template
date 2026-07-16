@@ -397,9 +397,9 @@ class SearchMapWithMapbox extends Component {
       config,
     } = this.props;
     const onListingClickedWithZoom = clickedListings => {
-      console.log('DEBUG clickedListings:', clickedListings, 'this.map exists:', !!this.map);
-      if (clickedListings && clickedListings.length === 1 && this.map) {
-        const geo = clickedListings[0].attributes.geolocation;
+      const listing = Array.isArray(clickedListings) ? clickedListings[0] : clickedListings;
+      if (listing && listing.attributes && listing.attributes.geolocation && this.map) {
+        const geo = listing.attributes.geolocation;
         this.map.flyTo({ center: [geo.lng, geo.lat], zoom: 15 });
       }
       onListingClicked(clickedListings);
