@@ -357,7 +357,7 @@ class SearchMapWithMapbox extends Component {
       this.map = new window.mapboxgl.Map({
         container: this.state.mapContainer,
         style: 'mapbox://styles/mapbox/streets-v10',
-        scrollZoom: false,
+        scrollZoom: true,
       });
       window.mapboxMap = this.map;
 
