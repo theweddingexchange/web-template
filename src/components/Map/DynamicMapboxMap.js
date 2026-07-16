@@ -74,7 +74,7 @@ class DynamicMapboxMap extends Component {
       style: 'mapbox://styles/mapbox/streets-v10',
       center: position,
       zoom,
-      scrollZoom: false,
+      scrollZoom: true,
     });
     this.map.addControl(new window.mapboxgl.NavigationControl({ showCompass: false }), 'top-left');
     this.map.addControl(new MultiTouch());
