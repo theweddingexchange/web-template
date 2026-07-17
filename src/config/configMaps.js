@@ -63,7 +63,7 @@ export const fuzzy = {
   // the original coordinates. The actual value is random, but the
   // obfuscated coordinates are withing a circle that has the same
   // radius as the offset.
-  offset: 500,
+  offset: 1000,
 
   // Default zoom level when showing a single circle on a Map. Should
   // be small enough so the whole circle fits in.
