@@ -358,6 +358,8 @@ class SearchMapWithMapbox extends Component {
         container: this.state.mapContainer,
         style: 'mapbox://styles/mapbox/streets-v10',
         scrollZoom: true,
+        center: [133.7751, -25.2744],
+        zoom: 4,
       });
       window.mapboxMap = this.map;
 
