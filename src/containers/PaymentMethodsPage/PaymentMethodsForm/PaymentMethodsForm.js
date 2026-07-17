@@ -119,7 +119,7 @@ class PaymentMethodsForm extends Component {
     this.stripe = window.Stripe(publishableKey);
 
     const elements = this.stripe.elements(stripeElementsOptions);
-    this.card = elements.create('card', { style: cardStyles });
+    this.card = elements.create('card', { style: cardStyles, hidePostalCode: true });
     this.card.mount(this.cardContainer);
     this.card.addEventListener('change', this.handleCardValueChange);
     // EventListener is the only way to simulate breakpoints with Stripe.
