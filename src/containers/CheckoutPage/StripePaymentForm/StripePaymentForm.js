@@ -233,12 +233,12 @@ const LocationOrShippingDetails = props => {
   return askShippingDetails ? (
     <ShippingDetails intl={intl} formApi={formApi} locale={locale} />
   ) : showPickUpLocation ? (
-    <div className={css.locationWrapper}>
-      <Heading as="h3" rootClassName={css.heading}>
-        <FormattedMessage id="StripePaymentForm.pickupDetailsTitle" />
-      </Heading>
-      <p className={css.locationDetails}>{locationDetails}</p>
-    </div>
+   <div className={css.locationWrapper}>
+        <Heading as="h3" rootClassName={css.heading}>
+          <FormattedMessage id="StripePaymentForm.pickupDetailsTitle" />
+        </Heading>
+        <p className={css.locationDetails}>Exact pickup location will be shared by the seller via Messages after purchase.</p>
+      </div>
   ) : showLocation && !isFuzzyLocation ? (
     <div className={css.locationWrapper}>
       <Heading as="h3" rootClassName={css.heading}>
