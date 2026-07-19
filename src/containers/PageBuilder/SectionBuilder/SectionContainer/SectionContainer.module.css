@@ -57,3 +57,7 @@
   bottom: 0;
   left: 0;
 }
+
+:global(#how-it-works) [class*="AspectRatioWrapper_aspectPadding"] {
+  padding-bottom: 35% !important;
+}
