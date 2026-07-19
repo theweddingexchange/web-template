@@ -13,5 +13,5 @@
   align-items: center;
 }
 :global(#section-1) {
-  min-height: 45vh;
+  min-height: 35vh;
 }
