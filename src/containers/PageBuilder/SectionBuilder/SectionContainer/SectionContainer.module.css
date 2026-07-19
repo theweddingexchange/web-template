@@ -37,6 +37,14 @@
   }
 }
 
+:global(#why-this-marketplace) .sectionContent {
+  padding-top: 16px;
+
+  @media (--viewportMedium) {
+    padding-top: 24px;
+  }
+}
+
 
 .backgroundImageWrapper {
   position: absolute;
