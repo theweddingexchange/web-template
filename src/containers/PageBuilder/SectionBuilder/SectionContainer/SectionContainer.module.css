@@ -45,6 +45,10 @@
   }
 }
 
+:global(#why-this-marketplace) [class*="AspectRatioWrapper_aspectPadding"] {
+  padding-bottom: 25% !important;
+}
+
 
 .backgroundImageWrapper {
   position: absolute;
