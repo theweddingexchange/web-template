@@ -29,7 +29,7 @@
   }
 }
 
-#recently-listed .sectionContent {
+:global(#recently-listed) .sectionContent {
   padding-top: 0;
 
   @media (--viewportMedium) {
