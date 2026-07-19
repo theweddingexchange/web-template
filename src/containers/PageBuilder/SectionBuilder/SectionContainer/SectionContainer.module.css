@@ -29,6 +29,15 @@
   }
 }
 
+#recently-listed .sectionContent {
+  padding-top: 16px;
+
+  @media (--viewportMedium) {
+    padding-top: 24px;
+  }
+}
+
+
 .backgroundImageWrapper {
   position: absolute;
   top: 0;
