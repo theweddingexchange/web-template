@@ -75,17 +75,17 @@ const CartLink = ({ itemCount = 0 }) => {
         className={css.topbarLinkLabel}
         style={{ position: 'relative', display: 'inline-flex', alignItems: 'center' }}
       >
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="26" height="26" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M8 9V7a4 4 0 0 1 8 0v2"
-            style={{ stroke: '#b81414' }}
+            style={{ stroke: '#b81414', fill: 'none' }}
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <rect x="4" y="9" width="16" height="13" rx="2" style={{ stroke: '#b81414' }} strokeWidth="2" strokeLinejoin="round" />
+          <rect x="4" y="9" width="16" height="13" rx="2" style={{ stroke: '#b81414', fill: 'none' }} strokeWidth="2" strokeLinejoin="round" />
           <g transform="rotate(35 17.5 9)">
-            <rect x="15.7" y="7.2" width="5.4" height="4" rx="1" style={{ stroke: '#b81414' }} strokeWidth="1.6" strokeLinejoin="round" />
+            <rect x="15.7" y="7.2" width="5.4" height="4" rx="1" style={{ stroke: '#b81414', fill: 'none' }} strokeWidth="1.6" strokeLinejoin="round" />
             <circle cx="17" cy="8.6" r="0.6" style={{ fill: '#b81414' }} />
           </g>
         </svg>
