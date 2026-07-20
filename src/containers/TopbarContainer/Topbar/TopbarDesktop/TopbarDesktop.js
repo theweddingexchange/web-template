@@ -55,7 +55,25 @@ const InboxLink = ({ notificationCount, inboxTab }) => {
     </NamedLink>
   );
 };
-
+const CartLink = () => {
+  return (
+    <button className={css.topbarLink} type="button" aria-label="Cart">
+      <span className={css.topbarLinkLabel}>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path
+            d="M6 6h15l-1.5 9h-12L4 3H1"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle cx="9" cy="20" r="1.4" fill="currentColor" />
+          <circle cx="18" cy="20" r="1.4" fill="currentColor" />
+        </svg>
+      </span>
+    </button>
+  );
+};
 const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLink, intl }) => {
   const currentPageClass = page => {
     const isAccountSettingsPage =
@@ -220,7 +238,7 @@ const TopbarDesktop = props => {
         hasClientSideContentReady={authenticatedOnClientSide || !isAuthenticatedOrJustHydrated}
         showCreateListingsLink={showCreateListingsLink}
       />
-
+   <CartLink />
       {inboxLinkMaybe}
       {profileMenuMaybe}
       {signupLinkMaybe}
