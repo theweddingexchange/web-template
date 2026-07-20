@@ -66,11 +66,15 @@ const CartLink = () => {
       <span className={css.topbarLinkLabel}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M6 6h15l-1.5 9h-12L4 3H1"
+            d="M2 3h2l.4 2M6 6h15l-1.5 9h-12L6 6zm0 0L4.4 5"
             stroke="#b81414"
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
+          />
+          <path
+            d="M7.2 8.5h13.1l-1.2 6.6a1 1 0 0 1-1 .9H8.9a1 1 0 0 1-1-.85L7.2 8.5z"
+            fill="#b81414"
           />
           <circle cx="9" cy="20" r="1.4" fill="#b81414" />
           <circle cx="18" cy="20" r="1.4" fill="#b81414" />
