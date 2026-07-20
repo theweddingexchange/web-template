@@ -55,7 +55,7 @@ const InboxLink = ({ notificationCount, inboxTab }) => {
     </NamedLink>
   );
 };
-const CartLink = () => {
+const CartLink = ({ itemCount = 0 }) => {
   return (
     <button
       className={css.topbarLink}
@@ -63,20 +63,42 @@ const CartLink = () => {
       aria-label="Cart"
       style={{ border: 'none', background: 'transparent', padding: 0, cursor: 'pointer' }}
     >
-      <span className={css.topbarLinkLabel}>
+      <span className={css.topbarLinkLabel} style={{ position: 'relative', display: 'inline-block' }}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
-            d="M8 8V6a4 4 0 0 1 8 0v2"
+            d="M8 9V7a4 4 0 0 1 8 0v2"
             stroke="#b81414"
-            strokeWidth="1.8"
+            strokeWidth="1.6"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <path
-            d="M5 8h14l-1 12.5a2 2 0 0 1-2 1.85H8a2 2 0 0 1-2-1.85L5 8z"
-            fill="#b81414"
-          />
+          <rect x="4" y="9" width="16" height="13" rx="2" stroke="#b81414" strokeWidth="1.6" strokeLinejoin="round" />
+          <g transform="rotate(35 17.5 9)">
+            <rect x="15.7" y="7.2" width="5.4" height="4" rx="1" stroke="#b81414" strokeWidth="1.4" strokeLinejoin="round" />
+            <circle cx="17" cy="8.6" r="0.55" fill="#b81414" />
+          </g>
         </svg>
+        {itemCount > 0 ? (
+          <span
+            style={{
+              position: 'absolute',
+              top: '-8px',
+              right: '-8px',
+              background: '#b81414',
+              color: 'white',
+              borderRadius: '50%',
+              width: '22px',
+              height: '22px',
+              fontSize: '13px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              fontWeight: 'bold',border: '2px solid white',
+            }}
+          >
+            {itemCount}
+          </span>
+        ) : null}
       </span>
     </button>
   );
