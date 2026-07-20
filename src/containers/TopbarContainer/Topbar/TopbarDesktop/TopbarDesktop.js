@@ -57,18 +57,23 @@ const InboxLink = ({ notificationCount, inboxTab }) => {
 };
 const CartLink = () => {
   return (
-    <button className={css.topbarLink} type="button" aria-label="Cart">
+    <button
+      className={css.topbarLink}
+      type="button"
+      aria-label="Cart"
+      style={{ border: 'none', background: 'transparent', padding: 0, cursor: 'pointer' }}
+    >
       <span className={css.topbarLinkLabel}>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path
             d="M6 6h15l-1.5 9h-12L4 3H1"
-            stroke="currentColor"
+            stroke="#b81414"
             strokeWidth="1.8"
             strokeLinecap="round"
             strokeLinejoin="round"
           />
-          <circle cx="9" cy="20" r="1.4" fill="currentColor" />
-          <circle cx="18" cy="20" r="1.4" fill="currentColor" />
+          <circle cx="9" cy="20" r="1.4" fill="#b81414" />
+          <circle cx="18" cy="20" r="1.4" fill="#b81414" />
         </svg>
       </span>
     </button>
