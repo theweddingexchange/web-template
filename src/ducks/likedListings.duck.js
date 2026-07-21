@@ -72,3 +72,22 @@ const likedListingsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
+      .addCase(fetchLikedListings.pending, state => {
+        state.inProgress = true;
+        state.fetched = false;
+        state.error = null;
+      })
+      .addCase(fetchLikedListings.fulfilled, (state, action) => {
+        state.inProgress = false;
+        state.fetched = true;
+        state.listingIds = action.payload.listingIds;
+      })
+      .addCase(fetchLikedListings.rejected, (state, action) => {
+        state.inProgress = false;
+        state.fetched = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export default likedListingsSlice.reducer;
