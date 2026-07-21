@@ -1,7 +1,10 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { types as sdkTypes } from '../util/sdkLoader';
 import * as log from '../util/log';
 import { storableError } from '../util/errors';
 import { addMarketplaceEntities } from './marketplaceData.duck';
+
+const { UUID } = sdkTypes;
 
 // ================ Async Thunks ================ //
 
@@ -12,9 +15,11 @@ const fetchLikedListingsPayloadCreator = async (listingIds, thunkAPI) => {
     return { apiResponse: null, listingIds: [] };
   }
 
+  const uuidIds = listingIds.map(id => new UUID(id));
+
   return sdk.listings
     .query({
-      ids: listingIds,
+      ids: uuidIds,
       include: ['images', 'author'],
       'fields.listing': [
         'title',
@@ -41,7 +46,7 @@ const fetchLikedListingsPayloadCreator = async (listingIds, thunkAPI) => {
     })
     .then(response => {
       dispatch(addMarketplaceEntities(response));
-      return { apiResponse: response, listingIds };
+      return { apiResponse: response, listingIds: uuidIds };
     })
     .catch(error => {
       log.error(error, 'liked-listings-fetch-failed', {});
@@ -67,22 +72,3 @@ const likedListingsSlice = createSlice({
   reducers: {},
   extraReducers: builder => {
     builder
-      .addCase(fetchLikedListings.pending, state => {
-        state.inProgress = true;
-        state.fetched = false;
-        state.error = null;
-      })
-      .addCase(fetchLikedListings.fulfilled, (state, action) => {
-        state.inProgress = false;
-        state.fetched = true;
-        state.listingIds = action.payload.listingIds;
-      })
-      .addCase(fetchLikedListings.rejected, (state, action) => {
-        state.inProgress = false;
-        state.fetched = false;
-        state.error = action.payload;
-      });
-  },
-});
-
-export default likedListingsSlice.reducer;
