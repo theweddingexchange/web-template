@@ -39,22 +39,6 @@ const LoginLink = () => {
   );
 };
 
-const InboxLink = ({ notificationCount, inboxTab }) => {
-  const notificationDot = notificationCount > 0 ? <div className={css.notificationDot} /> : null;
-  return (
-    <NamedLink
-      id="inbox-link"
-      className={css.topbarLink}
-      name="InboxPage"
-      params={{ tab: inboxTab }}
-    >
-      <span className={css.topbarLinkLabel}>
-        <FormattedMessage id="TopbarDesktop.inbox" />
-        {notificationDot}
-      </span>
-    </NamedLink>
-  );
-};
 const CartLink = ({ itemCount = 0 }) => {
   return (
     <button
@@ -115,7 +99,7 @@ const CartLink = ({ itemCount = 0 }) => {
     </button>
   );
 };
-const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLink, intl }) => {
+const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLink, intl, notificationCount, inboxTab }) => {
   const currentPageClass = page => {
     const isAccountSettingsPage =
       page === 'AccountSettingsPage' && ACCOUNT_SETTINGS_PAGES.includes(currentPage);
@@ -144,6 +128,17 @@ const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLin
             </NamedLink>
           </MenuItem>
         ) : null}
+        <MenuItem key="InboxPage">
+  <NamedLink
+    className={classNames(css.menuLink, currentPageClass('InboxPage'))}
+    name="InboxPage"
+    params={{ tab: inboxTab }}
+  >
+    <span className={css.menuItemBorder} />
+    <FormattedMessage id="TopbarDesktop.inbox" />
+    {notificationCount > 0 ? <div className={css.notificationDot} /> : null}
+  </NamedLink>
+</MenuItem>
         <MenuItem key="ProfileSettingsPage">
           <NamedLink
             className={classNames(css.menuLink, currentPageClass('ProfileSettingsPage'))}
@@ -225,10 +220,6 @@ const TopbarDesktop = props => {
   const giveSpaceForSearch = customLinks == null || customLinks?.length === 0;
   const classes = classNames(rootClassName || css.root, className);
 
-  const inboxLinkMaybe = authenticatedOnClientSide ? (
-    <InboxLink notificationCount={notificationCount} inboxTab={inboxTab} />
-  ) : null;
-
   const profileMenuMaybe = authenticatedOnClientSide ? (
     <ProfileMenu
       currentPage={currentPage}
@@ -236,6 +227,8 @@ const TopbarDesktop = props => {
       onLogout={onLogout}
       showManageListingsLink={showCreateListingsLink}
       intl={intl}
+      notificationCount={notificationCount}
+inboxTab={inboxTab}
     />
   ) : null;
 
@@ -280,7 +273,6 @@ const TopbarDesktop = props => {
         showCreateListingsLink={showCreateListingsLink}
       />
    <CartLink />
-      {inboxLinkMaybe}
       {profileMenuMaybe}
       {signupLinkMaybe}
       {loginLinkMaybe}
