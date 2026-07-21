@@ -1,6 +1,6 @@
 // ⚠️ If you modify the styling of this component and you're using the SectionListings component in your marketplace (featured listings)
 // please reflect those changes in the calculateCarouselHeight function in SectionListing.js to avoid layout issues
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { useConfiguration } from '../../context/configurationContext';
@@ -22,6 +22,95 @@ import { getListingCardTranslations } from './ListingCard.helpers';
 import css from './ListingCard.module.css';
 
 const LazyImage = lazyLoadWithDimensions(ResponsiveImage, { loadAfterInitialRendering: 3000 });
+
+const LIKED_LISTINGS_KEY = 'weddingExchangeLikedListings';
+
+const getLikedListingIds = () => {
+  if (typeof window === 'undefined') return [];
+  try {
+    const raw = window.localStorage.getItem(LIKED_LISTINGS_KEY);
+    return raw ? JSON.parse(raw) : [];
+  } catch (e) {
+    return [];
+  }
+};
+
+const setLikedListingIds = ids => {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(LIKED_LISTINGS_KEY, JSON.stringify(ids));
+  } catch (e) {
+    // ignore write errors (e.g. storage disabled)
+  }
+};
+
+/**
+ * LikeButton
+ * Heart icon overlaid on the top-right of a listing card's image.
+ * Toggles a liked state stored in localStorage, keyed by listing id.
+ * @component
+ */
+const LikeButton = ({ listingId }) => {
+  const [isLiked, setIsLiked] = useState(false);
+
+  useEffect(() => {
+    if (!listingId) return;
+    const likedIds = getLikedListingIds();
+    setIsLiked(likedIds.includes(listingId));
+  }, [listingId]);
+
+  const handleClick = e => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (!listingId) return;
+
+    const likedIds = getLikedListingIds();
+    const alreadyLiked = likedIds.includes(listingId);
+    const updated = alreadyLiked
+      ? likedIds.filter(id => id !== listingId)
+      : [...likedIds, listingId];
+
+    setLikedListingIds(updated);
+    setIsLiked(!alreadyLiked);
+  };
+
+  return (
+    <button
+      type="button"
+      onClick={handleClick}
+      aria-label={isLiked ? 'Remove from likes' : 'Add to likes'}
+      style={{
+        position: 'absolute',
+        top: '10px',
+        right: '10px',
+        zIndex: 2,
+        border: 'none',
+        background: 'rgba(255, 255, 255, 0.85)',
+        borderRadius: '50%',
+        width: '32px',
+        height: '32px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        padding: 0,
+      }}
+    >
+      <svg width="18" height="18" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 20.5C12 20.5 3 15 3 8.7C3 5.5 5.5 3 8.5 3C10.2 3 11.5 3.8 12 5C12.5 3.8 13.8 3 15.5 3C18.5 3 21 5.5 21 8.7C21 15 12 20.5 12 20.5Z"
+          style={
+            isLiked
+              ? { fill: '#b81414', stroke: '#b81414' }
+              : { fill: 'none', stroke: '#b81414' }
+          }
+          strokeWidth="1.8"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </button>
+  );
+};
 
 /**
  * ListingCardImage
@@ -155,28 +244,31 @@ export const ListingCard = props => {
       params={{ id, slug }}
       ariaLabel={cardAriaLabel}
     >
-      {showListingImage ? (
-        <ListingCardImage
-          renderSizes={renderSizes}
-          title={titlePlain}
-          listing={listing}
-          setActivePropsMaybe={setActivePropsMaybe}
-          aspectWidth={aspectWidth}
-          aspectHeight={aspectHeight}
-          variantPrefix={variantPrefix}
-          aspectRatioClassName={aspectRatioClassName}
-          lazyLoadImage={lazyLoadImage}
-        />
-      ) : (
-        <ListingCardThumbnail
-          style={cardStyle}
-          listingTitle={title}
-          className={aspectRatioClassName}
-          width={aspectWidth}
-          height={aspectHeight}
-          setActivePropsMaybe={setActivePropsMaybe}
-        />
-      )}
+      <div style={{ position: 'relative' }}>
+        {showListingImage ? (
+          <ListingCardImage
+            renderSizes={renderSizes}
+            title={titlePlain}
+            listing={listing}
+            setActivePropsMaybe={setActivePropsMaybe}
+            aspectWidth={aspectWidth}
+            aspectHeight={aspectHeight}
+            variantPrefix={variantPrefix}
+            aspectRatioClassName={aspectRatioClassName}
+            lazyLoadImage={lazyLoadImage}
+          />
+        ) : (
+          <ListingCardThumbnail
+            style={cardStyle}
+            listingTitle={title}
+            className={aspectRatioClassName}
+            width={aspectWidth}
+            height={aspectHeight}
+            setActivePropsMaybe={setActivePropsMaybe}
+          />
+        )}
+        <LikeButton listingId={id} />
+      </div>
       <div className={css.info}>
         {showPrice ? (
           <div className={css.price} title={priceTooltip}>
