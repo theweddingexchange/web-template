@@ -1,0 +1,26 @@
+.layoutWrapperMain {
+  display: flex;
+  flex-direction: column;
+}
+
+.root {
+  max-width: 1128px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 40px 24px 80px 24px;
+}
+
+.title {
+  margin-bottom: 32px;
+}
+
+.emptyMessage {
+  color: var(--matterColor, #4a4a4a);
+  font-size: 16px;
+}
+
+.listingGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 24px;
+}

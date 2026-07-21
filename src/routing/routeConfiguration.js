@@ -5,6 +5,8 @@ import getPageDataLoadingAPI from '../containers/pageDataLoadingAPI';
 import NotFoundPage from '../containers/NotFoundPage/NotFoundPage';
 import PreviewResolverPage from '../containers/PreviewResolverPage/PreviewResolverPage';
 
+const LikedListingsPage = loadable(() => import(/* webpackChunkName: "LikedListingsPage" */ '../containers/LikedListingsPage/LikedListingsPage'));
+
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
 // at that point css bundling / imports will happen in wrong order.
@@ -324,6 +326,11 @@ const routeConfiguration = (layoutConfig, accessControlConfig) => {
       component: ManageListingsPage,
       loadData: pageDataLoadingAPI.ManageListingsPage.loadData,
     },
+    {
+  path: '/likes',
+  name: 'LikedListingsPage',
+  component: LikedListingsPage,
+},
     {
       path: '/account',
       name: 'AccountSettingsPage',
