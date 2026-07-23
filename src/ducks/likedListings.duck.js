@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { types as sdkTypes } from '../util/sdkLoader';
+import { types as sdkTypes, createImageVariantConfig } from '../util/sdkLoader';
 import * as log from '../util/log';
 import { storableError } from '../util/errors';
 import { addMarketplaceEntities } from './marketplaceData.duck';
@@ -16,6 +16,9 @@ const fetchLikedListingsPayloadCreator = async (listingIds, thunkAPI) => {
   }
 
   const uuidIds = listingIds.map(id => new UUID(id));
+
+  const variantPrefix = 'listing-card';
+  const aspectRatio = 1;
 
   return sdk.listings
     .query({
@@ -42,6 +45,8 @@ const fetchLikedListingsPayloadCreator = async (listingIds, thunkAPI) => {
         'variants.scaled-small',
         'variants.scaled-medium',
       ],
+      ...createImageVariantConfig(`${variantPrefix}`, 400, aspectRatio),
+      ...createImageVariantConfig(`${variantPrefix}-2x`, 800, aspectRatio),
       'limit.images': 1,
     })
     .then(response => {
