@@ -128,7 +128,7 @@ const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLin
             </NamedLink>
           </MenuItem>
         ) : null}
-        <MenuItem key="InboxPage">
+      <MenuItem key="InboxPage">
   <NamedLink
     className={classNames(css.menuLink, currentPageClass('InboxPage'))}
     name="InboxPage"
@@ -139,6 +139,15 @@ const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLin
     {notificationCount > 0 ? <div className={css.notificationDot} /> : null}
   </NamedLink>
 </MenuItem>
+        <MenuItem key="LikedListingsPage">
+          <NamedLink
+            className={classNames(css.menuLink, currentPageClass('LikedListingsPage'))}
+            name="LikedListingsPage"
+          >
+            <span className={css.menuItemBorder} />
+            <FormattedMessage id="TopbarDesktop.likedListingsLink" />
+          </NamedLink>
+        </MenuItem>
         <MenuItem key="ProfileSettingsPage">
           <NamedLink
             className={classNames(css.menuLink, currentPageClass('ProfileSettingsPage'))}

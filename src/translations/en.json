@@ -1214,6 +1214,7 @@
   "TopbarDesktop.logo": "{marketplaceName}",
   "TopbarDesktop.logout": "Log out",
   "TopbarDesktop.profileSettingsLink": "Profile settings",
+  "TopbarDesktop.likedListingsLink": "My Likes",
   "TopbarDesktop.screenreader.profileMenu": "Open profile menu",
   "TopbarDesktop.screenreader.search": "Search",
   "TopbarDesktop.screenreader.topbarNavigation": "Top bar navigation",
