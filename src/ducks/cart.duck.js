@@ -52,7 +52,7 @@ const fetchCartListingsPayloadCreator = async (_arg, thunkAPI) => {
   return sdk.listings
     .query({
       ids: uuidIds,
-      include: ['images', 'author'],
+      include: ['images', 'author', 'currentStock'],
       'fields.listing': [
         'title',
         'price',
@@ -62,6 +62,7 @@ const fetchCartListingsPayloadCreator = async (_arg, thunkAPI) => {
         'publicData.transactionProcessAlias',
         'publicData.unitType',
       ],
+      'fields.stock': ['quantity'],
       'fields.image': [
         'variants.listing-card',
         'variants.listing-card-2x',

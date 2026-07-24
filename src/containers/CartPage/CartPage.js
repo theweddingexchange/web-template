@@ -27,6 +27,8 @@ const CartLineItem = props => {
 
   const { title } = listing.attributes || {};
   const price = listing.attributes?.price;
+  const availableStock = listing.currentStock?.attributes?.quantity;
+  const hasStockLimit = typeof availableStock === 'number';
   const firstImage = listing.images?.[0] || null;
   const variants = firstImage
     ? Object.keys(firstImage?.attributes?.variants || {}).filter(k =>
@@ -76,15 +78,27 @@ const CartLineItem = props => {
             id={`quantity-${listing.id.uuid}`}
             type="number"
             min="1"
+            max={hasStockLimit ? availableStock : undefined}
             value={quantity}
             onChange={e => {
-              const newQty = parseInt(e.target.value, 10);
-              if (!isNaN(newQty)) {
-                onUpdateQuantity(listing.id.uuid, newQty);
-              }
+              const rawQty = parseInt(e.target.value, 10);
+              if (isNaN(rawQty)) return;
+              const clampedQty = hasStockLimit
+                ? Math.min(Math.max(rawQty, 1), availableStock)
+                : Math.max(rawQty, 1);
+              onUpdateQuantity(listing.id.uuid, clampedQty);
             }}
             className={css.quantityInput}
           />
+          {hasStockLimit ? (
+            <span className={css.stockNote}>
+              <FormattedMessage
+                id="CartPage.stockNote"
+                defaultMessage="{availableStock} available"
+                values={{ availableStock }}
+              />
+            </span>
+          ) : null}
         </div>
 
         <button
