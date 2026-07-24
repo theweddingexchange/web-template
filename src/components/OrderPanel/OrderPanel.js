@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import loadable from '@loadable/component';
+import { addToCart } from '../../ducks/cart.duck';
 import classNames from 'classnames';
+const dispatch = useDispatch();
 
 import { FormattedMessage, useIntl } from '../../util/reactIntl';
 import {
@@ -593,6 +596,13 @@ const OrderPanel = props => {
           <div className={css.closedListingButton}>
             <FormattedMessage id="OrderPanel.closedListingButtonText" />
           </div>
+        ) : showProductOrderForm && !isOutOfStock ? (
+          <PrimaryButton
+            id={ORDER_PANEL_SUBMIT_BUTTON_ID}
+            onClick={() => dispatch(addToCart(listing.id.uuid, 1))}
+          >
+            <FormattedMessage id="OrderPanel.addToCartButton" defaultMessage="Add to Cart" />
+          </PrimaryButton>
         ) : (
           <PrimaryButton
             id={ORDER_PANEL_SUBMIT_BUTTON_ID}

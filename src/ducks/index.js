@@ -11,6 +11,7 @@ import ui from './ui.duck';
 import hostedAssets from './hostedAssets.duck';
 import featuredListings from './featuredListings.duck';
 import likedListings from './likedListings.duck';
+import cart from './cart.duck';
 import marketplaceData from './marketplaceData.duck';
 import paymentMethods from './paymentMethods.duck';
 import stripe from './stripe.duck';
@@ -25,6 +26,7 @@ export {
   hostedAssets,
   featuredListings,
   likedListings,
+  cart,
   marketplaceData,
   paymentMethods,
   stripe,

@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
 import { FormattedMessage } from '../../../../util/reactIntl';
 import { ACCOUNT_SETTINGS_PAGES } from '../../../../routing/routeConfiguration';
+import { getCartItemCount } from '../../../../ducks/cart.duck';
 import {
   Avatar,
   InlineTextButton,
@@ -39,17 +41,15 @@ const LoginLink = () => {
   );
 };
 
-const CartLink = ({ itemCount = 0 }) => {
+const CartLink = () => {
+  const itemCount = useSelector(getCartItemCount);
+
   return (
-    <button
+    <NamedLink
+      name="CartPage"
       className={css.topbarLink}
-      type="button"
       aria-label="Cart"
       style={{
-        border: 'none',
-        background: 'transparent',
-        padding: 0,
-        cursor: 'pointer',
         display: 'inline-flex',
         alignItems: 'center',
         height: '100%',
@@ -96,7 +96,7 @@ const CartLink = ({ itemCount = 0 }) => {
           </span>
         ) : null}
       </span>
-    </button>
+    </NamedLink>
   );
 };
 const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLink, intl, notificationCount, inboxTab }) => {
@@ -128,7 +128,7 @@ const ProfileMenu = ({ currentPage, currentUser, onLogout, showManageListingsLin
             </NamedLink>
           </MenuItem>
         ) : null}
-      <MenuItem key="InboxPage">
+        <MenuItem key="InboxPage">
   <NamedLink
     className={classNames(css.menuLink, currentPageClass('InboxPage'))}
     name="InboxPage"

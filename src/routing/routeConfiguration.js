@@ -6,6 +6,7 @@ import NotFoundPage from '../containers/NotFoundPage/NotFoundPage';
 import PreviewResolverPage from '../containers/PreviewResolverPage/PreviewResolverPage';
 
 const LikedListingsPage = loadable(() => import(/* webpackChunkName: "LikedListingsPage" */ '../containers/LikedListingsPage/LikedListingsPage'));
+const CartPage = loadable(() => import(/* webpackChunkName: "CartPage" */ '../containers/CartPage/CartPage'));
 
 // routeConfiguration needs to initialize containers first
 // Otherwise, components will import form container eventually and
@@ -331,6 +332,11 @@ const routeConfiguration = (layoutConfig, accessControlConfig) => {
   name: 'LikedListingsPage',
   component: LikedListingsPage,
 },
+    {
+      path: '/cart',
+      name: 'CartPage',
+      component: CartPage,
+    },
     {
       path: '/account',
       name: 'AccountSettingsPage',
