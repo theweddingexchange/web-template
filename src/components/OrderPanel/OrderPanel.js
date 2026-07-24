@@ -536,17 +536,14 @@ const OrderPanel = props => {
             {...priceVariantsMaybe}
             {...sharedProps}
           />
-        ) : showProductOrderForm ? (
-          <ProductOrderForm
-            formId="OrderPanelProductOrderForm"
-            currentStock={currentStock}
-            allowOrdersOfMultipleItems={allowOrdersOfMultipleItems}
-            pickupEnabled={pickupEnabled && displayPickup}
-            shippingEnabled={shippingEnabled && displayShipping}
-            displayDeliveryMethod={displayPickup || displayShipping}
-            onContactUser={onContactUser}
-            {...sharedProps}
-          />
+        ) : showProductOrderForm && !isOutOfStock ? (
+          <PrimaryButton onClick={() => dispatch(addToCart(listing.id.uuid, 1))}>
+            <FormattedMessage id="OrderPanel.addToCartButton" defaultMessage="Add to Cart" />
+          </PrimaryButton>
+        ) : showProductOrderForm && isOutOfStock ? (
+          <PrimaryButton disabled>
+            <FormattedMessage id="OrderPanel.ctaButtonMessageNoStock" />
+          </PrimaryButton>
         ) : showDownloadForm ? (
           <DigitalDownloadForm
             formId="OrderPanelDigitalDownloadForm"
