@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import loadable from '@loadable/component';
-import { addToCart } from '../../ducks/cart.duck';
 import classNames from 'classnames';
-const dispatch = useDispatch();
+
+import { addToCart } from '../../ducks/cart.duck';
 
 import { FormattedMessage, useIntl } from '../../util/reactIntl';
 import {
@@ -282,6 +282,7 @@ const OrderPanel = props => {
   const intl = useIntl();
   const location = useLocation();
   const history = useHistory();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setMounted(true);
